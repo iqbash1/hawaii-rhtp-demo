@@ -1825,6 +1825,11 @@ html>body{padding:0}</style>
 #rhtp-2028 .rh-demo .rh-compare-fill { background:var(--red); }
 #rhtp-2028 .rh-compare-empty { min-height:9px; font-size:16px; color:var(--sub); }
 #rhtp-2028 .rh-comparison-gap { margin-top:7px; }
+#rhtp-2028 .rh-progress-label { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 8px; font-size:20px; font-variant-numeric:tabular-nums; }
+#rhtp-2028 .rh-progress-label strong { font-size:23px; font-weight:600; }
+#rhtp-2028 .rh-program-track { position:relative; height:12px; background:var(--line); border-radius:3px; margin:10px 0 0; }
+#rhtp-2028 .rh-program-fill { display:block; height:100%; background:var(--red); border-radius:3px; }
+#rhtp-2028 .rh-program-limit { position:absolute; top:-4px; bottom:-4px; width:3px; background:var(--ink); transform:translateX(-50%); }
 #rhtp-2028 .rh-comparison-note { margin:12px 0 24px; }
 #rhtp-2028 .rh-funding-line { display:flex; align-items:center; flex-wrap:wrap; gap:12px 30px; padding:14px 0 8px; }
 #rhtp-2028 .rh-funding-line b { font-size:23px; margin-right:5px; }
@@ -2460,7 +2465,12 @@ function programGap(m){
  return num(amount)+unit+' to target · '+num(Number(pct.toFixed(1)))+'% below target';
 }
 function programComparison(m){
- return `<div class="rh-program-comparison">${comparePair({actual:m.latest,target:m.target,actualText:programValue(m,m.latest),targetText:(m.targetComparator==='<'?'Below ':'')+programValue(m,m.target)})}<p class="rh-small rh-demo rh-comparison-gap">${esc(programGap(m))}</p></div>`;
+ const limit=m.targetComparator==='<',suffix=m.unit.startsWith('percent')?'%':'';
+ const wording={'percent reduction':'% reduction achieved','percent increase':'% increase achieved','percent of sites':'% of sites','percent of referrals':'% of referrals completed','workers':' workers added','service years':' service-years committed','networks':' networks established','percent annual growth':'% annual growth'};
+ const latest=num(m.latest)+(wording[m.unit]||''),target=(limit?'below ':'')+num(m.target)+suffix;
+ const maximum=limit?Math.max(m.latest,m.target)*1.25:m.target,fill=Math.min(100,Math.max(0,m.latest/maximum*100));
+ const label=`${latest}; target ${target}. ${programGap(m)}${limit?'. Lower is better.':''}`;
+ return `<div class="rh-program-comparison"><p class="rh-progress-label"><strong class="rh-demo">${esc(latest)}</strong><span>· target <b>${esc(target)}</b></span></p><div class="rh-program-track${limit?' rh-limit-track':''}" role="img" aria-label="${esc(label)}"><span class="rh-program-fill" style="width:${fill}%"></span>${limit?`<span class="rh-program-limit" style="left:${m.target/maximum*100}%" aria-hidden="true"></span>`:''}</div><p class="rh-small rh-demo rh-comparison-gap">${esc(programGap(m))}${limit?' · Lower is better':''}</p></div>`;
 }
 function goalCards(){
  return `<div class="rh-goal-list">${goals.map(g=>`<article class="rh-goal-row" data-program-metric="${esc(g.metric)}"><div class="rh-goal-description"><h2>${esc(g.name)}</h2><p>${esc(g.label)}</p></div>${programComparison(metrics[g.metric])}<button class="rh-link cursor-interaction" data-goal="${esc(g.id)}">View work <span aria-hidden="true">→</span></button></article>`).join('')}</div>`;
@@ -2513,7 +2523,7 @@ function budgetMatrix(){
 }
 function overview(){
  const t=DEMO.totals;
- return `<div class="rh-title"><h1>How is rural health improving?</h1><p><span class="rh-demo">Latest: September 2028</span> · Application targets: FY2031</p></div>${goalCards()}<p class="rh-small rh-muted rh-comparison-note">Each pair uses the same scale. The gap shows distance to the target, not whether work is late.</p><div class="rh-funding-line"><span><b>${compact(t.recordedRhtpAwardAmount)}</b> verified RHTP awards</span><span class="rh-demo"><b>${compact(t.fictionalPaid)}</b> paid</span><button class="rh-link cursor-interaction" data-view="awards">View awardees →</button></div><p class="rh-small rh-muted">Selected award collection · 21 verified RHTP amounts. KupunAloha’s unconfirmed RHTP share is excluded.</p>${budgetMatrix()}<details class="rh-supporting-detail" data-map-panel ${state.mapOpen?'open':''}><summary>Explore work by island</summary>${islandPanel()}</details><details class="rh-supporting-detail"><summary>Who funds and manages the program?</summary><p><b>CMS</b> provides federal funding. The <b>Governor’s Office and Budget & Finance</b> provide state oversight. Initiative leads coordinate their workstreams; awarding offices issue individual contracts; awardees deliver the work.</p></details>`;
+ return `<div class="rh-title"><h1>How is rural health improving?</h1><p><span class="rh-demo">Latest: September 2028</span> · Application targets: FY2031</p></div>${goalCards()}<p class="rh-small rh-muted rh-comparison-note">The full bar represents the target.</p><div class="rh-funding-line"><span><b>${compact(t.recordedRhtpAwardAmount)}</b> verified RHTP awards</span><span class="rh-demo"><b>${compact(t.fictionalPaid)}</b> paid</span><button class="rh-link cursor-interaction" data-view="awards">View awardees →</button></div><p class="rh-small rh-muted">Selected award collection · 21 verified RHTP amounts. KupunAloha’s unconfirmed RHTP share is excluded.</p>${budgetMatrix()}<details class="rh-supporting-detail" data-map-panel ${state.mapOpen?'open':''}><summary>Explore work by island</summary>${islandPanel()}</details><details class="rh-supporting-detail"><summary>Who funds and manages the program?</summary><p><b>CMS</b> provides federal funding. The <b>Governor’s Office and Budget & Finance</b> provide state oversight. Initiative leads coordinate their workstreams; awarding offices issue individual contracts; awardees deliver the work.</p></details>`;
 }
 function activeFilters(){return state.initiative!=='all'||state.department!=='all'||state.goal!=='all'||state.island!=='all'||!!state.query;}
 function filters(){
