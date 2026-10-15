@@ -2453,9 +2453,6 @@ function comparePair({actual,target,actualLabel='Latest',targetLabel='Target',ac
  const column=(value,label,text,isDemo,kind)=>`<div class="rh-compare-column ${isDemo?'rh-demo':''}"><span class="rh-compare-label">${esc(label)}</span><strong>${esc(text??(valid(value)?num(value):'Not reported'))}</strong>${valid(value)?`<div class="rh-compare-track" aria-hidden="true"><span class="rh-compare-fill ${kind}" style="width:${Math.min(100,Math.max(0,value/max*100))}%"></span></div>`:'<div class="rh-compare-empty">No value available</div>'}</div>`;
  return `<div class="rh-compare-pair">${column(actual,actualLabel,actualText,actualDemo,'actual')}${column(target,targetLabel,targetText,targetDemo,'target')}</div>`;
 }
-function programValue(m,value){
- return num(value)+(m.unit==='percent reduction'?'% reduction':m.unit==='percent increase'?'% more':m.unit.startsWith('percent')?'%':'');
-}
 function programGap(m){
  const gap=Math.abs(m.target-m.latest),pct=Math.abs((m.latest-m.target)/m.target*100);
  const amount=Number(gap.toFixed(2));
