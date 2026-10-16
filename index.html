@@ -1895,42 +1895,62 @@ html>body{padding:0}</style>
 #rhtp-2028 .rh-rfx-list .rh-detail-body { max-width:1000px; }
 #rhtp-2028 .rh-definitions { font-size:16px; }
 /* Public overview: purpose, responsibilities, delivered work and outcomes. */
-#rhtp-2028 .rh-overview-title { max-width:950px; }
-#rhtp-2028 .rh-overview-jumps { display:flex; flex-wrap:wrap; gap:8px 24px; margin:10px 0 20px; }
+#rhtp-2028:has(.rh-overview-title) .rh-top { padding:16px 0; }
+#rhtp-2028:has(.rh-overview-title) .rh-banner { margin:12px 0 18px; }
+#rhtp-2028 .rh-overview-title { max-width:1100px; margin:18px 0 8px; }
+#rhtp-2028 .rh-overview-jumps { display:flex; flex-wrap:wrap; gap:4px 24px; margin:0 0 8px; }
 #rhtp-2028 .rh-overview-jumps a { display:inline-flex; align-items:center; min-height:48px; font-size:18px; color:var(--green); text-underline-offset:4px; }
-#rhtp-2028 .rh-overview-section { border-top:1px solid var(--line); padding:26px 0; scroll-margin-top:20px; }
-#rhtp-2028 .rh-overview-section > h2 { font-size:25px; margin-bottom:12px; }
-#rhtp-2028 .rh-public-goals { list-style:none; display:flex; flex-wrap:wrap; gap:10px 14px; padding:0; margin:18px 0 0; }
-#rhtp-2028 .rh-public-goals button { background:var(--wash); color:var(--ink); border:0; padding:10px 16px; border-radius:5px; font-size:18px; }
-#rhtp-2028 .rh-role-summary { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin:20px 0; }
-#rhtp-2028 .rh-role-summary > div { padding:18px; background:var(--wash); border-radius:6px; }
-#rhtp-2028 .rh-role-summary h3 { font-size:19px; margin-bottom:6px; }
-#rhtp-2028 .rh-role-summary p { font-size:17px; line-height:1.55; color:var(--sub); }
-#rhtp-2028 .rh-people-list { margin-top:16px; border-bottom:1px solid var(--line); }
-#rhtp-2028 .rh-people-row { border-top:1px solid var(--line); }
-#rhtp-2028 .rh-people-button { display:flex; justify-content:space-between; align-items:center; gap:20px; width:100%; border:0; background:transparent; text-align:left; padding:16px 0; color:var(--green); }
-#rhtp-2028 .rh-people-button strong { display:block; font-size:20px; color:var(--ink); }
-#rhtp-2028 .rh-people-button > span > span { display:block; font-size:17px; color:var(--sub); margin-top:4px; }
-#rhtp-2028 .rh-people-button > span:last-child { font-size:24px; }
+#rhtp-2028 .rh-overview-section { border-top:1px solid var(--line); padding:18px 0; scroll-margin-top:20px; }
+#rhtp-2028 .rh-overview-section > h2 { display:flex; align-items:center; gap:10px; font-size:24px; margin-bottom:12px; }
+#rhtp-2028 .rh-section-number { display:inline-flex; align-items:center; justify-content:center; flex:0 0 32px; height:32px; border-radius:50%; background:var(--ink); color:var(--paper); font-size:18px; }
+#rhtp-2028 .rh-public-goals { list-style:none; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; padding:0; margin:12px 0 0; }
+#rhtp-2028 .rh-public-goals button { display:flex; justify-content:space-between; align-items:center; gap:8px; width:100%; height:100%; background:var(--wash); color:var(--ink); border:0; padding:12px; border-radius:5px; font-size:18px; text-align:left; }
+#rhtp-2028 .rh-public-goals button > span { color:var(--green); }
+#rhtp-2028 .rh-role-summary { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin:12px 0 16px; }
+#rhtp-2028 .rh-role-summary > div { padding:0 0 0 12px; border-left:3px solid var(--line); }
+#rhtp-2028 .rh-role-summary h3 { font-size:18px; margin-bottom:2px; }
+#rhtp-2028 .rh-role-summary p { font-size:17px; line-height:1.5; color:var(--sub); }
+#rhtp-2028 .rh-people-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:12px 0 4px; }
+#rhtp-2028 .rh-people-row { min-width:0; border:1px solid var(--line); border-radius:6px; }
+#rhtp-2028 .rh-people-row-open { grid-column:1/-1; }
+#rhtp-2028 .rh-people-button { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; width:100%; border:0; background:transparent; text-align:left; padding:14px 16px; color:var(--green); }
+#rhtp-2028 .rh-people-button strong { display:block; font-size:20px; line-height:1.4; color:var(--ink); }
+#rhtp-2028 .rh-people-button .rh-initiative-code { display:block; font-size:16px; font-weight:600; color:var(--green); margin-bottom:2px; }
+#rhtp-2028 .rh-people-button .rh-initiative-lead { display:block; font-size:16px; line-height:1.5; color:var(--sub); margin-top:5px; }
+#rhtp-2028 .rh-people-button > span:last-child { font-size:24px; line-height:1.3; }
 #rhtp-2028 .rh-people-detail { background:var(--wash); padding:20px; margin-bottom:16px; border-radius:6px; }
 #rhtp-2028 .rh-people-detail > h3 { margin-bottom:14px; }
 #rhtp-2028 .rh-partner-examples > div { margin:12px 0 18px; }
 #rhtp-2028 .rh-partner-examples .rh-link { text-align:left; font-size:18px; }
 #rhtp-2028 .rh-partner-examples p { margin:3px 0; }
-#rhtp-2028 .rh-overview-measures { margin-top:18px; }
-#rhtp-2028 .rh-overview-measure { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr); gap:18px 36px; align-items:center; padding:20px 0; border-top:1px solid var(--line); }
+#rhtp-2028 .rh-performance-context { border-top:1px solid var(--line); padding:14px 0; }
+#rhtp-2028 .rh-overview-performance { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px; }
+#rhtp-2028 .rh-overview-performance > section { min-width:0; padding-top:14px; }
+#rhtp-2028 .rh-overview-measures { margin-top:12px; }
+#rhtp-2028 .rh-overview-measure { display:grid; grid-template-columns:1fr; gap:8px; padding:16px 0; border-bottom:1px solid var(--line); }
 #rhtp-2028 .rh-overview-measure h3 { font-size:20px; }
-#rhtp-2028 .rh-overview-measure > div > .rh-small { margin-top:6px; }
+#rhtp-2028 .rh-overview-measure > div > .rh-small { margin-top:2px; }
+#rhtp-2028 .rh-overview-measure .rh-progress-label { font-size:18px; }
+#rhtp-2028 .rh-overview-measure .rh-progress-label strong { font-size:24px; }
+#rhtp-2028 .rh-overview-measure .rh-program-track { height:14px; margin-top:7px; }
+#rhtp-2028 .rh-overview-measure .rh-comparison-gap { margin-top:5px; }
 #rhtp-2028 .rh-overview-section > .rh-definitions { border-top:1px solid var(--line); margin-top:16px; }
 #rhtp-2028 .rh-overview-section > .rh-definitions p { margin:10px 0; }
 #rhtp-2028 .rh-overview-next { border-top:1px solid var(--line); padding:18px 0; }
+@media(max-width:1100px){
+ #rhtp-2028 .rh-public-goals { grid-template-columns:repeat(3,minmax(0,1fr)); }
+ #rhtp-2028 .rh-people-list { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ #rhtp-2028 .rh-overview-performance { grid-template-columns:1fr; gap:0; }
+ #rhtp-2028 .rh-overview-measure { grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); gap:12px 24px; align-items:center; }
+}
 @media(max-width:650px){
- #rhtp-2028 .rh-role-summary,#rhtp-2028 .rh-overview-measure { grid-template-columns:1fr; gap:12px; }
+ #rhtp-2028 .rh-role-summary,#rhtp-2028 .rh-people-list,#rhtp-2028 .rh-overview-measure { grid-template-columns:1fr; gap:12px; }
  #rhtp-2028 .rh-overview-section > h2 { font-size:23px; }
  #rhtp-2028 .rh-role-summary { gap:10px; }
  #rhtp-2028 .rh-overview-jumps { gap:4px 18px; }
  #rhtp-2028 .rh-people-detail { padding:16px; }
- #rhtp-2028 .rh-public-goals { gap:8px; }
+ #rhtp-2028 .rh-public-goals { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+ #rhtp-2028 .rh-public-goals li:last-child { grid-column:1/-1; }
 }
 @media(max-width:1100px){
  #rhtp-2028 .rh-award-columns { display:none; }
@@ -2570,17 +2590,18 @@ function overviewMeasures(ids){
  return `<div class="rh-overview-measures">${ids.map(id=>`<article class="rh-overview-measure" data-program-metric="${id}"><div><h3>${esc(names[id])}</h3><p class="rh-small rh-muted">${esc(notes[id])}</p></div>${programComparison(metrics[id],true)}</article>`).join('')}</div>`;
 }
 function overviewMeasureNotes(ids,label){
- return `<details class="rh-definitions"><summary>${esc(label)}</summary><p>Targets: November 2025 grant application, Table 10, PDF pp. 61–63. They need confirmation against the current approved framework.</p><p>Numeric baseline observations and actual performance reports are not available in this demo. Percent reductions describe change from baseline, not percentage-point changes in a rate.</p>${ids.map(id=>{const m=metrics[id];return `<p><b>${esc(metricShort[id])}:</b> ${esc(m.population)}.<br><span class="rh-demo">${esc(programGap(m))}</span></p>`;}).join('')}<p>Supporting awards show alignment with a goal; they do not establish that an award caused the measured change.</p></details>`;
+ return `<details class="rh-definitions"><summary>${esc(label)}</summary><p>Targets: November 2025 grant application, Table 10, PDF pp. 61–63. They need confirmation against the current approved framework.</p><p>Numeric baseline observations and actual performance reports are not available in this demo. Percent reductions describe change from baseline, not percentage-point changes in a rate.</p>${ids.map(id=>{const m=metrics[id];return `<p><b>${esc(metricShort[id])}:</b> ${esc(m.population)}.<br><span class="rh-demo">${esc(programGap(m))}</span></p>`;}).join('')}<p>These program measures are separate from the selected award collection. Supporting awards show alignment with a goal; they do not establish that an award caused the measured change.</p></details>`;
 }
 function overviewPeople(){
- return `<div class="rh-role-summary"><div><h3>Federal government</h3><p>Centers for Medicare &amp; Medicaid Services funds the program.</p></div><div><h3>Hawaiʻi government</h3><p>The Governor’s Office and Budget &amp; Finance oversee the program. Agencies lead initiatives and manage awards.</p></div><div><h3>Awarded organizations</h3><p>Deliver equipment, services and systems for rural communities.</p></div></div><p class="rh-small rh-muted">Six initiatives. Select one for responsibilities, named delivery partners and related measures.</p><div class="rh-people-list">${Object.entries(publicInitiatives).map(([id,p])=>{const i=INITIATIVES.find(i=>i.id===id),open=state.openInitiative===id;return `<article class="rh-people-row"><button class="rh-people-button cursor-interaction" data-initiative-detail="${esc(id)}" aria-expanded="${open}" aria-controls="initiative-${keyFor(id)}"><span><strong>${esc(p.purpose)} · ${esc(id)}</strong><span>${esc(p.lead)}</span></span><span aria-hidden="true">${open?'−':'+'}</span></button><div id="initiative-${keyFor(id)}" class="rh-people-detail" ${open?'':'hidden'}><h3>${esc(initiativeName(i))}</h3>${p.examples.length?`<div class="rh-partner-examples"><p class="rh-small"><b>Examples of awarded work</b></p>${p.examples.map(aid=>{const a=DATA.awards.find(a=>a.id===aid);return `<div><button class="rh-link cursor-interaction" data-award="${esc(a.id)}">${esc(shortName(a))} →</button><p class="rh-small">${esc(DEMO.awards[a.id].scopeShort)}</p><p class="rh-small rh-muted">Awarding office: ${esc(a.agency)}${a.initiative.includes(' / ')?' · Joint RHIN / RVBI award':''}</p></div>`;}).join('')}</div>`:''}${initiativeDetailContent(i)}</div></article>`;}).join('')}</div><button class="rh-link cursor-interaction" data-view="awards">See all ${DATA.awards.length} award records →</button>`;
+ return `<div class="rh-role-summary" aria-label="Funding, oversight and delivery"><div><h3>Funds the program</h3><p>Centers for Medicare &amp; Medicaid Services</p></div><div><h3>Oversees the program</h3><p>Governor’s Office + Budget &amp; Finance</p></div><div><h3>Delivers the work</h3><p>Awarded organizations, through agency-led initiatives</p></div></div><p class="rh-small rh-muted">Six initiatives and their leads. Select one for responsibilities, partners and related measures.</p><div class="rh-people-list">${Object.entries(publicInitiatives).map(([id,p])=>{const i=INITIATIVES.find(i=>i.id===id),open=state.openInitiative===id;return `<article class="rh-people-row${open?' rh-people-row-open':''}"><button class="rh-people-button cursor-interaction" data-initiative-detail="${esc(id)}" aria-expanded="${open}" aria-controls="initiative-${keyFor(id)}"><span><span class="rh-initiative-code">${esc(id)}</span><strong>${esc(p.purpose)}</strong><span class="rh-initiative-lead">${esc(p.lead)}</span></span><span aria-hidden="true">${open?'−':'+'}</span></button><div id="initiative-${keyFor(id)}" class="rh-people-detail" ${open?'':'hidden'}><h3>${esc(initiativeName(i))}</h3>${p.examples.length?`<div class="rh-partner-examples"><p class="rh-small"><b>Examples of awarded work</b></p>${p.examples.map(aid=>{const a=DATA.awards.find(a=>a.id===aid);return `<div><button class="rh-link cursor-interaction" data-award="${esc(a.id)}">${esc(shortName(a))} →</button><p class="rh-small">${esc(DEMO.awards[a.id].scopeShort)}</p><p class="rh-small rh-muted">Awarding office: ${esc(a.agency)}${a.initiative.includes(' / ')?' · Joint RHIN / RVBI award':''}</p></div>`;}).join('')}</div>`:''}${initiativeDetailContent(i)}</div></article>`;}).join('')}</div><button class="rh-link cursor-interaction" data-view="awards">See all ${DATA.awards.length} award records →</button>`;
 }
 function overview(){
- return `<div class="rh-title rh-overview-title"><h1>Better rural health, across Hawaiʻi</h1><p>A five-year program to improve access to care, strengthen the workforce and connect health services in rural communities.</p></div><nav class="rh-overview-jumps" aria-label="On this overview"><a href="#rh-goals">1. Goals</a><a href="#rh-people">2. Who does what</a><a href="#rh-work-delivered">3. Work delivered</a><a href="#rh-outcomes">4. Outcomes</a></nav>
- <section id="rh-goals" class="rh-overview-section"><h2>1. What are we trying to achieve?</h2><ul class="rh-public-goals">${goals.map(g=>`<li><button class="cursor-interaction" data-goal="${g.id}" aria-label="See work supporting ${esc(g.name)}">${esc(g.name)}</button></li>`).join('')}</ul></section>
- <section id="rh-people" class="rh-overview-section"><h2>2. Who is involved, and for what?</h2>${overviewPeople()}</section>
- <section id="rh-work-delivered" class="rh-overview-section"><h2>3. What work has been delivered?</h2><p class="rh-small rh-muted">Workforce and system capacity · <span class="rh-demo">September 2028</span> · application targets for FY2031</p>${overviewMeasures(overviewDelivery)}<p class="rh-small rh-muted">These program measures are separate from the selected award collection. A gap to the final target does not by itself mean work is late.</p><button class="rh-link cursor-interaction" data-award="SHPDA2609">See a project’s delivery: hospital transformation →</button>${overviewMeasureNotes(overviewDelivery,'Delivery measures & definitions')}</section>
- <section id="rh-outcomes" class="rh-overview-section"><h2>4. What is changing for people?</h2><p class="rh-small rh-muted">Health and access outcomes · <span class="rh-demo">September 2028</span> · application targets for FY2031</p>${overviewMeasures(overviewOutcomes)}<p class="rh-small rh-muted">Each full bar represents the target. Other measures appear under the relevant initiative above.</p>${overviewMeasureNotes(overviewOutcomes,'How these outcomes are measured')}</section>
+ return `<div class="rh-title rh-overview-title"><h1>Better rural health, across Hawaiʻi</h1><p>Five years to improve care, strengthen the workforce and connect rural health services.</p></div><nav class="rh-overview-jumps" aria-label="On this overview"><a href="#rh-goals">1. Goals</a><a href="#rh-people">2. Who does what</a><a href="#rh-work-delivered">3. Work delivered</a><a href="#rh-outcomes">4. Outcomes</a></nav>
+ <section id="rh-goals" class="rh-overview-section"><h2><span class="rh-section-number">1</span> Goals</h2><ul class="rh-public-goals">${goals.map(g=>`<li><button class="cursor-interaction" data-goal="${g.id}" aria-label="See work supporting ${esc(g.name)}">${esc(g.name)} <span aria-hidden="true">→</span></button></li>`).join('')}</ul></section>
+ <section id="rh-people" class="rh-overview-section"><h2><span class="rh-section-number">2</span> Who does what</h2>${overviewPeople()}</section>
+ <div class="rh-performance-context"><p><span class="rh-demo">Results: September 2028</span> · Application targets: FY2031</p><p class="rh-small rh-muted">Each full bar is that measure’s target. A gap does not by itself mean work is late.</p></div>
+ <div class="rh-overview-performance"><section id="rh-work-delivered" class="rh-overview-section"><h2><span class="rh-section-number">3</span> Work delivered</h2><p class="rh-small rh-muted">Workforce and system capacity</p>${overviewMeasures(overviewDelivery)}<button class="rh-link cursor-interaction" data-award="SHPDA2609">See a project’s delivery →</button>${overviewMeasureNotes(overviewDelivery,'Delivery measures & definitions')}</section>
+ <section id="rh-outcomes" class="rh-overview-section"><h2><span class="rh-section-number">4</span> Outcomes</h2><p class="rh-small rh-muted">Changes in health and access to care</p>${overviewMeasures(overviewOutcomes)}${overviewMeasureNotes(overviewOutcomes,'How these outcomes are measured')}</section></div>
  <div class="rh-overview-next"><button class="rh-link cursor-interaction" data-view="funding">Explore funding & five-year budgets →</button><details class="rh-supporting-detail" data-map-panel ${state.mapOpen?'open':''}><summary>Explore work by island</summary>${islandPanel()}</details></div>`;
 }
 function funding(){
