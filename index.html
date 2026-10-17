@@ -2141,7 +2141,6 @@ html>body{padding:0}</style>
 #rhtp-2028 .rh-overview-compact-measure .rh-target-attainment { display:block; }
 #rhtp-2028 .rh-overview-compact-measure .rh-program-track { margin:0; }
 #rhtp-2028 .rh-overview-compact-measure .rh-measure-about > summary { flex-wrap:wrap; gap:4px 8px; padding:4px 0; text-decoration:none; }
-#rhtp-2028 .rh-overview-compact-measure .rh-measure-gap { flex:1 0 100%; font-size:16px; }
 #rhtp-2028 .rh-overview-compact-measure .rh-measure-about-label { text-decoration:underline; white-space:nowrap; }
 #rhtp-2028 .rh-overview-compact-measure .rh-measure-about > summary::after { margin-left:0; }
 #rhtp-2028 .rh-overview-bar-note { display:flex; flex-wrap:wrap; align-items:center; gap:0 20px; margin:12px 0 24px; }
@@ -2162,7 +2161,6 @@ html>body{padding:0}</style>
  #rhtp-2028 .rh-overview-measures { grid-template-columns:1fr; }
  #rhtp-2028 .rh-overview-compact-measure .rh-program-comparison { grid-template-columns:max-content minmax(0,1fr); gap:12px; }
  #rhtp-2028 .rh-overview-compact-measure .rh-measure-about > summary { flex-wrap:nowrap; }
- #rhtp-2028 .rh-overview-compact-measure .rh-measure-gap { flex-basis:auto; }
 }
 @media(max-width:760px){
  #rhtp-2028 .rh-award-spending { grid-column:1/-1; padding-left:0; }
@@ -2174,7 +2172,6 @@ html>body{padding:0}</style>
  #rhtp-2028 .rh-overview-funding .rh-funding-note { grid-column:1/-1; }
  #rhtp-2028 .rh-overview-compact-measure .rh-program-comparison { grid-template-columns:1fr; gap:4px; }
  #rhtp-2028 .rh-overview-compact-measure .rh-measure-about > summary { flex-wrap:wrap; }
- #rhtp-2028 .rh-overview-compact-measure .rh-measure-gap { flex-basis:100%; }
 }
 
 @media(max-width:620px){
@@ -2710,7 +2707,7 @@ function programMeasure(id,layout='detail'){
   rvbi_networks:'Source context: the application reports hospital-led accountable care organizations in four counties and FQHC-led organizations in two. These county counts are not a baseline count of the new rural networks tracked here.'
  };
  const baseline=sourceBaseline[id]||(m.unit==='percent reduction'||m.unit==='percent increase'?'The change is relative to baseline, not a percentage-point change in a rate. Numeric baseline observations are not available.':'Actual performance reports and numeric baseline observations are not available in this collection.');
- return `<article class="rh-overview-measure${compactOverview?' rh-overview-compact-measure':''}" data-program-metric="${esc(id)}"><div class="rh-measure-heading"><h3 class="${compactOverview?'rh-target-heading':'rh-demo'}">${heading}</h3><p class="rh-small rh-muted">${esc(compactOverview?c.context.split(' · ').slice(0,-1).join(' · '):c.context)}${compactOverview?'':` · <span class="rh-demo">${esc(date)}</span>`}</p></div>${programComparison(m,true,target,compactOverview)}<details class="rh-definitions rh-measure-about"><summary class="cursor-interaction" aria-label="About this measure: ${esc(metricShort[id])}">${compactOverview?`<span class="rh-measure-gap rh-demo">${esc(programGap(m).split(' · ')[0])}</span>`:''}<span class="rh-measure-about-label">About this measure</span></summary><p><b>What it measures:</b> ${esc(c.definition)}</p><p><b>Why it matters:</b> ${esc(c.why)}</p><p><b>Responsible initiative:</b> ${esc(initiativeName(i))}.<br><b>Lead:</b> ${esc(publicInitiatives[i.id].lead)}.</p><p><b>Source:</b> Hawaiʻi grant application, November 2025, ${esc(m.targetSource.table)}, PDF p. ${esc(m.targetSource.pdfPage)}. This is an application target; confirm it against the current approved framework.</p><p>${esc(baseline)}</p><p class="rh-demo"><b>Compared with target:</b> ${esc(programGap(m))}. The latest result and reporting date are demo values.</p><p>Supporting awards show alignment with the program. They do not establish that a particular award caused this result.</p></details></article>`;
+ return `<article class="rh-overview-measure${compactOverview?' rh-overview-compact-measure':''}" data-program-metric="${esc(id)}"><div class="rh-measure-heading"><h3 class="${compactOverview?'rh-target-heading':'rh-demo'}">${heading}</h3><p class="rh-small rh-muted">${esc(compactOverview?c.context.split(' · ').slice(0,-1).join(' · '):c.context)}${compactOverview?'':` · <span class="rh-demo">${esc(date)}</span>`}</p></div>${programComparison(m,true,target,compactOverview)}<details class="rh-definitions rh-measure-about"><summary class="cursor-interaction" aria-label="About this measure: ${esc(metricShort[id])}"><span class="rh-measure-about-label">About this measure</span></summary><p><b>What it measures:</b> ${esc(c.definition)}</p><p><b>Why it matters:</b> ${esc(c.why)}</p><p><b>Responsible initiative:</b> ${esc(initiativeName(i))}.<br><b>Lead:</b> ${esc(publicInitiatives[i.id].lead)}.</p><p><b>Source:</b> Hawaiʻi grant application, November 2025, ${esc(m.targetSource.table)}, PDF p. ${esc(m.targetSource.pdfPage)}. This is an application target; confirm it against the current approved framework.</p><p>${esc(baseline)}</p><p class="rh-demo"><b>Compared with target:</b> ${esc(programGap(m))}. The latest result and reporting date are demo values.</p><p>Supporting awards show alignment with the program. They do not establish that a particular award caused this result.</p></details></article>`;
 }
 function overviewMeasures(ids){return `<div class="rh-overview-measures">${ids.map(id=>programMeasure(id,'overview')).join('')}</div>`;}
 const goalMeasures={
@@ -2747,7 +2744,7 @@ function overview(){
  <div class="rh-performance-context"><p><span>Application targets: ${esc(headline.targetYear)}</span><span class="rh-demo">Results: ${esc(date)}</span></p></div>
  <div class="rh-overview-performance"><section id="rh-work-delivered" class="rh-overview-section"><h2>Progress · work delivered</h2>${overviewMeasures(overviewDelivery)}</section>
  <section id="rh-outcomes" class="rh-overview-section"><h2>Outcomes · changes in care</h2>${overviewMeasures(overviewOutcomes)}</section></div>
- <p class="rh-small rh-muted rh-overview-bar-note">Full bar = target. A gap alone does not mean work is late. <button class="rh-link cursor-interaction" data-award="SHPDA2609">See a project’s delivery →</button></p>
+ <p class="rh-small rh-muted rh-overview-bar-note">Full bar = target. <button class="rh-link cursor-interaction" data-award="SHPDA2609">See a project’s delivery →</button></p>
  <section id="rh-people" class="rh-overview-section"><h2>Who does what</h2>${overviewRoles()}<div id="rh-initiative-mapping" class="rh-initiative-mapping"><h3>Six initiatives</h3>${overviewPeople()}</div></section>
  <div class="rh-overview-next"><button class="rh-link cursor-interaction" data-view="funding">Explore funding & five-year budgets →</button><details class="rh-supporting-detail" data-map-panel ${state.mapOpen?'open':''}><summary>Explore work by island</summary>${islandPanel()}</details></div>`;
 }
