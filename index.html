@@ -2135,6 +2135,8 @@ html>body{padding:0}</style>
 #rhtp-2028 .rh-overview-measures { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:stretch; gap:12px; margin-top:0; }
 #rhtp-2028 .rh-overview-compact-measure { grid-template-columns:1fr; align-items:stretch; gap:2px; padding:8px 12px 4px; background:var(--wash); border:1px solid var(--line); border-radius:8px; }
 #rhtp-2028 .rh-overview-compact-measure .rh-program-comparison { display:grid; grid-template-columns:1fr; align-items:center; gap:4px; }
+#rhtp-2028 .rh-overview-compact-measure .rh-measure-number { display:block; margin-bottom:4px; font-size:52px; line-height:1.1; font-weight:700; font-variant-numeric:tabular-nums; }
+#rhtp-2028 .rh-overview-compact-measure .rh-measure-description { display:block; }
 #rhtp-2028 .rh-overview-compact-measure .rh-progress-label { display:block; }
 #rhtp-2028 .rh-overview-compact-measure .rh-program-track { margin:0; }
 #rhtp-2028 .rh-overview-compact-measure .rh-measure-about > summary { flex-wrap:wrap; gap:4px 8px; padding:4px 0; text-decoration:none; }
@@ -2165,6 +2167,7 @@ html>body{padding:0}</style>
  #rhtp-2028 .rh-award-spending { grid-column:1/-1; padding-left:0; }
 }
 @media(max-width:480px){
+ #rhtp-2028 .rh-overview-compact-measure .rh-measure-number { font-size:48px; }
  #rhtp-2028 .rh-overview-funding { grid-template-columns:1fr; gap:8px; }
  #rhtp-2028 .rh-overview-funding > div { display:grid; grid-template-columns:1fr auto; gap:0 12px; align-items:baseline; padding-left:0; border-left:0; }
  #rhtp-2028 .rh-overview-funding .rh-funding-note { grid-column:1/-1; }
@@ -2697,6 +2700,7 @@ function programMeasure(id,layout='detail'){
  const compactOverview=layout==='overview';
  const m=metrics[id],c=measureCopy[id],i=INITIATIVES.find(i=>demoMetrics(i.id).some(m=>m.id===id));
  const statement=num(m.latest)+c.statement,target=(m.targetComparator==='<'?'below ':'')+num(m.target)+c.target;
+ const heading=compactOverview?`<span class="rh-measure-number">${esc(num(m.latest)+(c.statement.startsWith('%')?'%':''))}</span> <span class="rh-measure-description">${esc(c.statement.replace(/^%?\s*/,''))}</span>`:esc(statement);
  const date=new Date(m.reportingDate+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',year:'numeric',timeZone:'UTC'});
  const sourceBaseline={
   rvbi_cost_growth:'Application baseline: 4% annual growth in FY2025. Actual subsequent performance reports are not available in this collection.',
@@ -2705,7 +2709,7 @@ function programMeasure(id,layout='detail'){
   rvbi_networks:'Source context: the application reports hospital-led accountable care organizations in four counties and FQHC-led organizations in two. These county counts are not a baseline count of the new rural networks tracked here.'
  };
  const baseline=sourceBaseline[id]||(m.unit==='percent reduction'||m.unit==='percent increase'?'The change is relative to baseline, not a percentage-point change in a rate. Numeric baseline observations are not available.':'Actual performance reports and numeric baseline observations are not available in this collection.');
- return `<article class="rh-overview-measure${compactOverview?' rh-overview-compact-measure':''}" data-program-metric="${esc(id)}"><div class="rh-measure-heading"><h3 class="rh-demo">${esc(statement)}</h3><p class="rh-small rh-muted">${esc(compactOverview?c.context.split(' · ').slice(0,-1).join(' · '):c.context)}${compactOverview?'':` · <span class="rh-demo">${esc(date)}</span>`}</p></div>${programComparison(m,true,target,compactOverview)}<details class="rh-definitions rh-measure-about"><summary class="cursor-interaction" aria-label="About this measure: ${esc(metricShort[id])}">${compactOverview?`<span class="rh-measure-gap rh-demo">${esc(programGap(m).split(' · ')[0])}</span>`:''}<span class="rh-measure-about-label">About this measure</span></summary><p><b>What it measures:</b> ${esc(c.definition)}</p><p><b>Why it matters:</b> ${esc(c.why)}</p><p><b>Responsible initiative:</b> ${esc(initiativeName(i))}.<br><b>Lead:</b> ${esc(publicInitiatives[i.id].lead)}.</p><p><b>Source:</b> Hawaiʻi grant application, November 2025, ${esc(m.targetSource.table)}, PDF p. ${esc(m.targetSource.pdfPage)}. This is an application target; confirm it against the current approved framework.</p><p>${esc(baseline)}</p><p class="rh-demo"><b>Compared with target:</b> ${esc(programGap(m))}. The latest result and reporting date are demo values.</p><p>Supporting awards show alignment with the program. They do not establish that a particular award caused this result.</p></details></article>`;
+ return `<article class="rh-overview-measure${compactOverview?' rh-overview-compact-measure':''}" data-program-metric="${esc(id)}"><div class="rh-measure-heading"><h3 class="rh-demo">${heading}</h3><p class="rh-small rh-muted">${esc(compactOverview?c.context.split(' · ').slice(0,-1).join(' · '):c.context)}${compactOverview?'':` · <span class="rh-demo">${esc(date)}</span>`}</p></div>${programComparison(m,true,target,compactOverview)}<details class="rh-definitions rh-measure-about"><summary class="cursor-interaction" aria-label="About this measure: ${esc(metricShort[id])}">${compactOverview?`<span class="rh-measure-gap rh-demo">${esc(programGap(m).split(' · ')[0])}</span>`:''}<span class="rh-measure-about-label">About this measure</span></summary><p><b>What it measures:</b> ${esc(c.definition)}</p><p><b>Why it matters:</b> ${esc(c.why)}</p><p><b>Responsible initiative:</b> ${esc(initiativeName(i))}.<br><b>Lead:</b> ${esc(publicInitiatives[i.id].lead)}.</p><p><b>Source:</b> Hawaiʻi grant application, November 2025, ${esc(m.targetSource.table)}, PDF p. ${esc(m.targetSource.pdfPage)}. This is an application target; confirm it against the current approved framework.</p><p>${esc(baseline)}</p><p class="rh-demo"><b>Compared with target:</b> ${esc(programGap(m))}. The latest result and reporting date are demo values.</p><p>Supporting awards show alignment with the program. They do not establish that a particular award caused this result.</p></details></article>`;
 }
 function overviewMeasures(ids){return `<div class="rh-overview-measures">${ids.map(id=>programMeasure(id,'overview')).join('')}</div>`;}
 const goalMeasures={
