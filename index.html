@@ -2109,24 +2109,31 @@ html>body{padding:0}</style>
 #rhtp-2028:has(.rh-overview-title) .rh-top { padding:8px 0; }
 #rhtp-2028:has(.rh-overview-title) .rh-banner { display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 16px; padding:8px 12px; margin:10px 0 12px; }
 #rhtp-2028:has(.rh-overview-title) .rh-banner strong { white-space:nowrap; }
-#rhtp-2028 .rh-overview-title { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); align-items:center; gap:24px; max-width:none; margin:12px 0 0; }
+#rhtp-2028 .rh-overview-title { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); align-items:center; gap:24px; max-width:none; margin:8px 0 0; }
 #rhtp-2028 .rh-overview-title p { margin:0; white-space:nowrap; }
+#rhtp-2028 .rh-overview-funding-block { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px 20px; }
+#rhtp-2028 .rh-overview-funding-block > dl { grid-column:1/-1; }
+#rhtp-2028 .rh-award-spending { grid-column:2/-1; padding-left:16px; }
+#rhtp-2028 .rh-award-spending-labels { display:flex; justify-content:space-between; gap:4px 16px; flex-wrap:wrap; font-size:18px; }
+#rhtp-2028 .rh-award-spending-track { display:flex; height:12px; margin-top:4px; border-radius:3px; overflow:hidden; }
+#rhtp-2028 .rh-award-spending-paid { background:var(--red); }
+#rhtp-2028 .rh-award-spending-unpaid { background:repeating-linear-gradient(135deg,var(--rose) 0 4px,var(--red) 4px 5px); }
 #rhtp-2028 .rh-overview-funding { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; margin:0; }
 #rhtp-2028 .rh-overview-funding > div { padding-left:16px; border-left:1px solid var(--line); }
 #rhtp-2028 .rh-overview-funding dt { font-size:18px; }
 #rhtp-2028 .rh-overview-funding dd { margin:0; font-size:30px; font-weight:600; line-height:1.35; font-variant-numeric:tabular-nums; }
 #rhtp-2028 .rh-overview-funding .rh-funding-note { font-size:16px; line-height:1.4; font-weight:400; }
-#rhtp-2028 #rh-goals { padding-top:0; }
+#rhtp-2028 #rh-goals { padding-top:0; padding-bottom:6px; }
 #rhtp-2028 .rh-overview-section { padding:10px 0; }
 #rhtp-2028 .rh-overview-section > h2 { margin-bottom:8px; }
 #rhtp-2028 .rh-public-goals { margin-top:8px; gap:10px; }
-#rhtp-2028 .rh-public-goals button { padding:10px 12px; }
-#rhtp-2028 .rh-performance-context { padding:10px 0 6px; border-top:0; }
+#rhtp-2028 .rh-public-goals button { padding:6px 12px; }
+#rhtp-2028 .rh-performance-context { padding:4px 0 2px; border-top:0; }
 #rhtp-2028 .rh-performance-context p { display:flex; flex-wrap:wrap; gap:2px 24px; font-size:17px; }
 #rhtp-2028 .rh-overview-performance { gap:32px; }
-#rhtp-2028 .rh-overview-performance > section { padding:8px 0 0; }
+#rhtp-2028 .rh-overview-performance > section { padding:4px 0 0; }
 #rhtp-2028 .rh-overview-measures { margin-top:0; }
-#rhtp-2028 .rh-overview-compact-measure { grid-template-columns:1fr; align-items:stretch; gap:4px; padding:8px 0 4px; }
+#rhtp-2028 .rh-overview-compact-measure { grid-template-columns:1fr; align-items:stretch; gap:2px; padding:6px 0 2px; }
 #rhtp-2028 .rh-overview-compact-measure .rh-program-comparison { display:grid; grid-template-columns:max-content minmax(0,1fr); align-items:center; gap:12px; }
 #rhtp-2028 .rh-overview-compact-measure .rh-progress-label { display:block; }
 #rhtp-2028 .rh-overview-compact-measure .rh-program-track { margin:0; }
@@ -2147,6 +2154,7 @@ html>body{padding:0}</style>
  #rhtp-2028 .rh-overview-compact-measure .rh-measure-gap { flex-basis:100%; }
 }
 @media(max-width:760px){
+ #rhtp-2028 .rh-award-spending { grid-column:1/-1; padding-left:0; }
  #rhtp-2028 .rh-overview-performance { grid-template-columns:1fr; gap:16px; }
  #rhtp-2028 .rh-overview-compact-measure .rh-program-comparison { grid-template-columns:max-content minmax(0,1fr); gap:12px; }
  #rhtp-2028 .rh-overview-compact-measure .rh-measure-about > summary { flex-wrap:nowrap; }
@@ -2719,8 +2727,9 @@ function overviewPeople(goalId=null){
 function overviewFunding(){
  const records=AWARD_RECON.records.filter(r=>Number.isFinite(r.rhtpAmount));
  const awarded=financialSum(records,r=>r.rhtpAmount),paid=financialSum(records,r=>DEMO.awards[r.id].paid);
+ const unpaid=Math.round((awarded-paid)*100)/100,paidPercent=paid/awarded*100,unpaidPercent=100-paidPercent;
  const date=new Date(DEMO.dataThrough+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',year:'numeric',timeZone:'UTC'});
- return `<dl class="rh-overview-funding" aria-label="Funding summary"><div><dt>Five-year budget</dt><dd>${compact(PROGRAM_BUDGET.total)}</dd><dd class="rh-funding-note">Application estimate</dd></div><div><dt>Total awarded</dt><dd>${compact(awarded)}</dd><dd class="rh-funding-note">Verified · this collection</dd></div><div class="rh-demo"><dt>Spent (paid)</dt><dd>${compact(paid)}</dd><dd class="rh-funding-note">Same awards · ${esc(date)}</dd></div></dl>`;
+ return `<div class="rh-overview-funding-block"><dl class="rh-overview-funding" aria-label="Funding summary"><div><dt>Five-year budget</dt><dd>${compact(PROGRAM_BUDGET.total)}</dd><dd class="rh-funding-note">Application estimate</dd></div><div><dt>Total awarded</dt><dd>${compact(awarded)}</dd><dd class="rh-funding-note">Verified · this collection</dd></div><div class="rh-demo"><dt>Spent (paid)</dt><dd>${compact(paid)}</dd><dd class="rh-funding-note">Same awards · ${esc(date)}</dd></div></dl><div class="rh-award-spending rh-demo"><div class="rh-award-spending-labels"><span>${paidPercent.toFixed(1)}% paid</span><span>Unpaid: ${compact(unpaid)} (${unpaidPercent.toFixed(1)}%)</span></div><div class="rh-award-spending-track" role="img" aria-label="Payments against ${compact(awarded)} in verified awards from this collection: ${compact(paid)} paid (${paidPercent.toFixed(1)}%); ${compact(unpaid)} remains unpaid (${unpaidPercent.toFixed(1)}%). Payments and the unpaid balance are fictional; this is not an available budget balance."><span class="rh-award-spending-paid" style="width:${paidPercent}%"></span><span class="rh-award-spending-unpaid" style="width:${unpaidPercent}%"></span></div></div></div>`;
 }
 function overview(){
  const headline=metrics[overviewDelivery[0]],date=new Date(headline.reportingDate+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',year:'numeric',timeZone:'UTC'});
